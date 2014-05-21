@@ -47,15 +47,15 @@ void loop() {
     if (skyx>=TVX) skyx=0;
     if (skyx<0) skyx = TVX+skyx;
     //skyy =-1;
-    //drawSky(skyx,skyy);
-    //updateHUD();
+    drawSky(skyx,skyy);
+    updateHUD();
     if (track1[segment+2]==0xff) segment = 0;
-    //drawRoad();
-    //updatecar();
+    drawRoad();
+    updatecar();
     //simulatespeed(200);
-    TV.draw_line(20,HORIZON,TVX,HORIZON,1);
-    TV.draw_line(16,HORIZON,16,0,1);
-    alphabitmap(-1,HORIZON,porsche_med,porsche_med_alpha);
+    //TV.draw_line(20,HORIZON,TVX,HORIZON,1);
+    //TV.draw_line(16,HORIZON,16,0,1);
+    //alphabitmap(-1,HORIZON,porsche_med,porsche_med_alpha);
 }
 
 void updateHUD(){
@@ -63,6 +63,7 @@ void updateHUD(){
     TV.print(TVXCENTER+20,1,"      ");
     //TV.print(0,1,z_world);
     TV.print(0,0,"       ");
+    //TV.draw_rect(0,0,20,10,0,0);
     //TV.print(0,8,dynamichz);
     if (hillstate==0) TV.print(0,0,"FLAT");
     if (hillstate==1) TV.print(0,0,"HILLC");
@@ -72,8 +73,8 @@ void updateHUD(){
     if (hillstate==5) TV.print(0,0,"DROP2");
     if (hillstate==6) TV.print(0,0,"DOWN");
     if (hillstate==7) TV.print(0,0,"VALLEY");
-    if (zspeed < 10) TV.print(TVXCENTER+20+3*6,1,zspeed);
-    else if (zspeed < 100) TV.print(TVXCENTER+20+2*6,1,zspeed);
+    if (zspeed < 10) TV.print(TVXCENTER+20+1*6,1,"0");
+    else if (zspeed < 100) TV.print(TVXCENTER+20+1*6,1,zspeed);
     if (zspeed > 100) TV.print(TVXCENTER+20+1*6,1,zspeed);
 
 }

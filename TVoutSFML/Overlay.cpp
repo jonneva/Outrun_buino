@@ -204,7 +204,7 @@ void alphabitmap(int8_t x, int8_t y, const unsigned char * bmp, const unsigned c
             rshift = 8;        // avoid divisible by eight cases = masks second byte
         }
         width = bmp[i]; i++; //width = pgm_read_byte((uint32_t)(bmp) + i);
-        if (width =< -x) return; // its not visible anymore
+        if (width <= -x) return; // its not visible anymore
         lines = bmp[i]; i++;//lines = pgm_read_byte((uint32_t)(bmp) + i);
         width+=x; // delete cropped width from width
         if (width&7) {      // if width is not divisible by 8
@@ -220,11 +220,11 @@ void alphabitmap(int8_t x, int8_t y, const unsigned char * bmp, const unsigned c
         for (uint8_t l = 0; l < lines; l++) {
             i+=-x/8; // increment bmp pointer i to point to first visible byte
             si = ((y + l) % display.vres)*display.hres; // si is index to screen
-            save = display.screen[si]; // Save is the screen byte
 
             // START X LOOP
             for ( uint16_t b = i + width; i < b;) {
                 // Add left shifted bits of first byte
+                save = display.screen[si]; // Save is the screen byte
                 atemp = alpha[i]; // read first byte of alpha data
                 temp = bmp[i]; // temp = pgm_read_byte((uint32_t)(bmp) + i++); //bmp data
                 onbits = temp & atemp; // get bits that should be turned on
@@ -259,9 +259,10 @@ void alphabitmap(int8_t x, int8_t y, const unsigned char * bmp, const unsigned c
                 temp = bmp[i+1];    // temp = pgm_read_byte((uint32_t)(bmp) + i++); //bmp data
                 onbits = temp & atemp; // get bits that should be turned on
                 offbits = ~temp & atemp; // get bits that should be turned off
-                temp = (onbits >> rshift ) | save; // add onbits to intermediate result
+                temp = (onbits >> rshift ); // add onbits to intermediate result
                 temp = temp & (~(offbits >> rshift)); // delete offbits, store result
                 temp = (temp >> xtra) << xtra; // clean unwanted bits
+                temp = temp | save; //bugfix
                 //temp = 0xff;
                 display.screen[si] = temp; //first byte to screen buffer, increment
                 if ((-x&7)>xtra && lshift) i++; // cases where last si byte includes only a part of last i byte, also avoid divisible by eight cases

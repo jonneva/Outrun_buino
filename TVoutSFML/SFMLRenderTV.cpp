@@ -9,7 +9,7 @@ using namespace sf;
 TVout TV;
 sf::Texture TVtexture;
 sf::Sprite TVsprite;
-unsigned int windowWidth=400, windowHeight=300;
+unsigned int windowWidth=800, windowHeight=600;
 float viewZoom = 1.f;
 sf::RectangleShape myPixel;
 RenderWindow window{{windowWidth, windowHeight}, "SFML TVout"};

@@ -7,7 +7,7 @@
 #define CURVED
 #define SEGMENTS
 //#define ROADSIDE
-//#define TRAFFIC
+// #define TRAFFIC
 #define TRAFFIC2
 
 int zlookup[YTABS],xlookup[YTABS];
@@ -158,7 +158,7 @@ void drawRoad() {
     switch (hillstate) {
     case HILLCOMING:
         nexthz = HORIZON; //was -3
-        nexthill =300; // was 250
+        nexthill =250; // was 250
         break;
     case FLATLAND:
         nexthz = HORIZON;
@@ -166,27 +166,27 @@ void drawRoad() {
         break;
     case UPSLOPE:
         nexthz = HORIZON - 11;
-        nexthill=150; //was 210
+        nexthill=210; //was 210
         break;
     case CREST:
         nexthz = HORIZON + 6;
-        nexthill=512;
+        nexthill=310; //was 512
         break;
     case DROPCOMING:
-        nexthz = HORIZON + 3;
-        nexthill=400;
+        nexthz = HORIZON - 5; //was +3
+        nexthill=400; //was 400
         break;
     case DROPCOMING2:
         nexthz = HORIZON + 2;
-        nexthill=440;
+        nexthill=400; // was 440
         break;
     case DOWNSLOPE:
         nexthz = HORIZON ;
-        nexthill=300;
+        nexthill=270; // was 300
         break;
     case VALLEY:
         nexthz = HORIZON -4 ;
-        nexthill=300;
+        nexthill=270; // was 300
         break;
     default:
         nexthz = HORIZON;
